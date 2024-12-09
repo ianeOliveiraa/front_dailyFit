@@ -1,0 +1,77 @@
+<div class="flex flex-column align-items-center login-container">
+  <div class="sm:col-12 md:col-6 lg:col-4">
+    <mat-card>
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <button mat-icon-button (click)="onBackClick()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <span class="ml-2">Daily FIT</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-card-header>
+        <mat-card-title>
+          Novo usuário
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="p-2">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="mt-2">
+          <div class="flex">
+            <mat-form-field class="flex-1 m-2">
+              <mat-label>E-mail</mat-label>
+              <input type="email" matInput placeholder="E-mail" formControlName="email">
+              <mat-error
+                *ngIf="this.registerForm.get('email')?.touched && this.registerForm.get('email')?.hasError('required')">
+                Email é obrigatório</mat-error>
+              <mat-error
+                *ngIf="this.registerForm.get('email')?.touched && this.registerForm.get('email')?.hasError('email')">
+                E-mail inválido</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="flex">
+            <mat-form-field class="flex-1 m-2">
+              <mat-label>Primeiro nome</mat-label>
+              <input type="text" matInput placeholder="Primeiro Nome" formControlName="firstname">
+              <mat-error
+                *ngIf="this.registerForm.get('firstname')?.touched && this.registerForm.get('firstname')?.hasError('required')">
+                Primeiro nome é obrigatório</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="flex-1 m-2">
+              <mat-label>Sobrenome</mat-label>
+              <input type="text" matInput placeholder="Sobrenome" formControlName="lastname">
+              <mat-error
+                *ngIf="this.registerForm.get('lastname')?.touched && this.registerForm.get('lastname')?.hasError('required')">
+                Sobrenome é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="flex">
+            <mat-form-field class="flex-1 m-2">
+              <mat-label>Senha</mat-label>
+              <input type="password" matInput placeholder="Senha" formControlName="password">
+              <mat-error
+                *ngIf="this.registerForm.get('password')?.touched && this.registerForm.get('password')?.hasError('required')">
+                Senha é obrigatório</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="flex-1 m-2">
+              <mat-label>Confirmar senha</mat-label>
+              <input type="password" matInput placeholder="Confirmar senha" formControlName="passwordConfirm">
+              <mat-error
+                *ngIf="this.registerForm.get('passwordConfirm')?.touched && this.registerForm.get('passwordConfirm')?.hasError('required')">
+                Campo é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-error class="flex m-2"
+            *ngIf="this.registerForm.get('passwordConfirm')?.dirty && this.registerForm.hasError('passwordsNotMatching')">
+            Senhas diferentes</mat-error>
+
+          <div class="flex">
+            <button class="flex-1" type="submit" mat-flat-button [disabled]="!registerForm.valid">Salvar</button>
+          </div>
+        </form>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+</div>

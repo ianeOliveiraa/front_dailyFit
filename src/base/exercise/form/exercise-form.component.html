@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="goToListExercise()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="ml-2">
+        @if(object.id == null) {
+          Adicionar exercício ao treino <b>{{training.name}}</b>
+        }
+        @else {
+          Editar execício do treino <b>{{training.name}}</b>
+        }
+      </span>
+      <span class="navbar-spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card-content>
+    <form [formGroup]="formGroup" class="mt-2">
+      <div class="flex">
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Grupo Muscular</mat-label>
+          <mat-select class="form-select "  formControlName="muscle_group" required>
+            @for (option of groupMusculares; track option) {
+              <mat-option  [value]="option.id">
+                {{ option.name }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="flex">
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Exercicio</mat-label>
+          <mat-select class="form-select "  formControlName="exercise" required>
+            @for (option of exercicios; track option) {
+              <mat-option  [value]="option.id">
+                {{ option.name }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div> 
+
+      <div class="flex">
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Repetições</mat-label>
+          <input matInput type="number" formControlName="repetitions" autofocus required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>series</mat-label>
+          <input matInput type="number" formControlName="series" autofocus required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Tempo de descanso</mat-label>
+          <input matInput type="number" formControlName="rest_time" autofocus required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-card-actions align="end">
+        <button mat-stroked-button class="btn-default"  type="submit"
+              (click)="saveOrUpdate()"
+              [disabled]="!formGroup.valid">
+        Salvar execício
+       </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
+

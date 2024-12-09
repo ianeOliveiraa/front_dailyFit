@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+mat-card {
+    width: 450px;
+    @include mat.card-overrides((title-text-size: 35px,
+            subtitle-text-size: 20px,
+        ));
+}
+
+
+mat-card-title {
+    width: 100%;
+    text-align: center;
+}
+
+.login-container {
+    padding: 7em 0;
+}

@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-toolbar>Perfil do usuário</mat-toolbar>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()">
+      <div class="flex">
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" [(ngModel)]="userProfile.login.first_name" name="first_name" placeholder="Nome" required />
+        </mat-form-field>
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Sobrenome</mat-label>
+          <input matInput type="text" [(ngModel)]="userProfile.login.last_name" name="last_name" placeholder="Sobrenome" required />
+        </mat-form-field>
+      </div>
+
+      <div class="flex">
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Idade</mat-label>
+          <input matInput type="text" [(ngModel)]="userProfile.age" name="age" placeholder="Idade"
+                 required />
+        </mat-form-field>
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Peso</mat-label>
+          <input matInput type="text" [(ngModel)]="userProfile.weight" name="weight" placeholder="Peso"
+                 required />
+        </mat-form-field>
+        <mat-form-field class="flex-1 m-2">
+          <mat-label>Altura</mat-label>
+          <input matInput type="text" [(ngModel)]="userProfile.height" name="height" placeholder="Altura"
+                 required />
+        </mat-form-field>
+      </div>
+
+      <mat-card-actions align="end">
+        <button type="submit" class="btn-default"  mat-stroked-button>Salvar</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
+
