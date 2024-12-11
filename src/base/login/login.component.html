@@ -1,10 +1,14 @@
 <div class="flex flex-column align-items-center login-container">
-  <mat-card class="sm:col-12 md:col-6 lg:col-4 p-5">
-    <mat-card-header class="mb-4">
-      <mat-card-title>Daily FIT</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="mt-4">
-      <form (ngSubmit)="onSubmit()" class="flex flex-column gap-1">
+  <mat-card class="sm:col-12 md:col-6 lg:col-4 xl:col-3 flex flex-column p-5 ">
+    <mat-card-content style="background-image: url(logo/logo_login.png);" class="img w-full h-12rem ">
+    </mat-card-content>
+    <mat-card-content >
+      <mat-card-header>
+        <mat-card-subtitle>
+          <span>Login</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <form (ngSubmit)="onSubmit()" class="flex flex-column gap-1 mt-3">
         <mat-form-field>
           <mat-label>E-mail</mat-label>
           <input matInput type="text" [(ngModel)]="username" name="username" placeholder="E-mail" required />
@@ -19,11 +23,12 @@
         </mat-error>
         <button type="submit" class="btn-default" mat-flat-button>Entrar</button>
       </form>
+      <mat-card-actions align="end">
+        <a mat-button class="ml-3 mr-3" routerLink="/register">
+          Criar usuário
+        </a>
+      </mat-card-actions>
     </mat-card-content>
-    <mat-card-actions align="end">
-      <a mat-button class="ml-3 mr-3" routerLink="/register">
-        Criar usuário
-      </a>
-    </mat-card-actions>
+
   </mat-card>
 </div>

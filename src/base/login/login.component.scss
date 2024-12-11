@@ -1,18 +1,24 @@
 @use '@angular/material' as mat;
 
 mat-card {
-    width: 450px;
-    @include mat.card-overrides((title-text-size: 35px,
-            subtitle-text-size: 20px,
-        ));
+  max-width: 40rem !important;
+  @include mat.card-overrides((title-text-size: 35px,
+    subtitle-text-size: 20px,
+  ));
 }
 
 
 mat-card-title {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .login-container {
-    padding: 7em 0;
+  padding: 7em 0;
+}
+
+.img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
