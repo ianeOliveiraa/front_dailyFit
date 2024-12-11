@@ -10,7 +10,7 @@ import { BaseService } from '../../shared/service/base.service';
 import {NavigationExtras, Router, RouterLink} from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { NgClass } from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
 import { MatDialog, MatDialogActions } from '@angular/material/dialog';
 import {TrainingDialogComponent} from '../training/dialog/training-dialog.component';
 import {MealFood} from '../../shared/models/meal_food';
@@ -26,7 +26,6 @@ import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
     MatCard,
     MatTableModule,
     MatFormFieldModule,
-    MatInput,
     MatIconButton,
     MatIcon,
     FormsModule,
@@ -35,15 +34,16 @@ import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
     MatCardContent,
     MatToolbar,
     MatToolbarRow,
+    DatePipe,
   ],
   templateUrl: './diet.component.html',
   styleUrl: './diet.component.scss'
 })
 export class DietComponent implements OnInit{
   public dataSource: Meal[] = [];
-  public displayedColumns = ['id', 'date', 'meal_type', 'total_calories', 'actions'];
-  public searchMealType: string = '';
-  public searchDate: string = '';
+  public displayedColumns = ['date', 'meal_type', 'total_calories', 'actions'];
+  // public searchMealTypeLabel: string = '';
+  // public searchDate: string = '';
 
   private router: Router = new Router();
 
@@ -59,8 +59,8 @@ export class DietComponent implements OnInit{
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    this.service.addParameter('meal_type', this.searchMealType);
-    this.service.addParameter('date', this.searchDate);
+    // this.service.addParameter('meal_type_label', this.searchMealTypeLabel);
+    // this.service.addParameter('date', this.searchDate);
     this.service.getAll().subscribe({
       next: (data: Meal[]) => {
         this.dataSource = data;

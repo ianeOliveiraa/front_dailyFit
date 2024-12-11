@@ -56,8 +56,9 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
     super(http, URLS.MEAL_FOOD);
     this.foodService = new BaseService<Food>(http, URLS.FOOD);
 
-    if (data && data.meal) {
+    if (data) {
       this.meal = data.meal;
+      this.object = data.food ?? new MealFood();
     }
   }
 

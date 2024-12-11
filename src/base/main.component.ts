@@ -55,7 +55,7 @@ export class MainComponent {
       });
     this.menuList = [
       { title: 'TREINO', route: '/training', isCurrent: false },
-      { title: 'ACOMPANHE SUA DIETA', route: '/diet', isCurrent: false },
+      { title: 'DIETA', route: '/diet', isCurrent: false },
     ];
   }
 
