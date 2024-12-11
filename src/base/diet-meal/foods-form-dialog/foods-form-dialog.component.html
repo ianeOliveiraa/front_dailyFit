@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Adicionar Comida</h2>
+<h2 mat-dialog-title>Adicionar alimento</h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
     <mat-form-field>
-      <mat-label>Comidas</mat-label>
+      <mat-label>Alimentos</mat-label>
       <mat-select class="form-select "  formControlName="description" required>
         @for (option of foods; track option) {
           <mat-option  [value]="option.id">

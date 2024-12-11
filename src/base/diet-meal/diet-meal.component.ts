@@ -23,6 +23,8 @@ import {MealTypePipe} from '../diet/meal-type.pipe';
 import {UnitPipe} from './unit.pipe';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FoodsFormDialogComponent} from './foods-form-dialog/foods-form-dialog.component';
+import {Food} from '../../shared/models/food';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-diet-meal',
@@ -48,16 +50,18 @@ import {FoodsFormDialogComponent} from './foods-form-dialog/foods-form-dialog.co
     MatToolbarRow,
     MatCardContent,
     MealTypePipe,
-    UnitPipe
+    UnitPipe,
+    DatePipe
   ],
   templateUrl: './diet-meal.component.html',
   styleUrl: './diet-meal.component.css'
 })
 export class DietMealComponent implements OnInit{
   public dataSource: MealFood[] = [];
-  public displayedColumns = ['description', 'value', 'unit', 'total_kcal', 'actions'];
+  public displayedColumns = ['description', 'total_kcal', 'value', 'unit', 'actions'];
   public meal: Meal;
   private router: Router = new Router();
+  public food: Food;
 
   private service: BaseService<MealFood>
   // private mealService: BaseService<Meal>
@@ -69,6 +73,7 @@ export class DietMealComponent implements OnInit{
     this.route.data
       .subscribe((data) => {
         this.meal = data['meal'] as Meal;
+        this.food = data['food'] as Food;
         this.mealType = this.meal.meal_type;
       });
   }
@@ -102,10 +107,9 @@ export class DietMealComponent implements OnInit{
     });
   }
 
-
-  public onClickEditDiet(mealFoodId: number): void {
+  public onClickEditDiet(mealFood: MealFood): void {
     const dialogRef = this.dialog.open(FoodsFormDialogComponent, {
-      data: { meal: this.meal, description: "", value: "" },
+      data: { meal: this.meal, food: mealFood },
     });
 
     dialogRef.afterClosed().subscribe(result => {

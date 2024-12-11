@@ -8,7 +8,7 @@
       <span class="navbar-spacer"></span>
       <button mat-fab extended (click)="onAdd()" class="btn-default">
         <mat-icon>add</mat-icon>
-        Adicionar Comida
+        Adicionar alimento
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -30,7 +30,7 @@
         <div class="  font-bold">Data:</div>
       </div>
       <div class="col-6">
-        <div class="  ">{{ meal.date }}</div>
+        <div class="  ">{{ meal.date | date: 'dd/MM/yyyy' }}</div>
       </div>
     </div>
 
@@ -51,6 +51,11 @@
         <td mat-cell *matCellDef="let element"> {{ element.food.description }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="total_kcal">
+        <th mat-header-cell *matHeaderCellDef> kcal</th>
+        <td mat-cell *matCellDef="let element"> {{ element.food.total_kcal }} kcal</td>
+      </ng-container>
+
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef> Quantidade</th>
         <td mat-cell *matCellDef="let element"> {{ element.value }}</td>
@@ -61,16 +66,13 @@
         <td mat-cell *matCellDef="let element"> {{ element.food.unit | unit}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="total_kcal">
-        <th mat-header-cell *matHeaderCellDef> kcal</th>
-        <td mat-cell *matCellDef="let element"> {{ element.food.total_kcal }} kcal</td>
-      </ng-container>
+
 
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="edit" (click)="onClickEditDiet(element.id)">
+          <button mat-icon-button aria-label="edit" (click)="onClickEditDiet(element)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button aria-label="delete" (click)="deleteObject(element.id)">
@@ -89,7 +91,7 @@
 
 @if (dataSource.length === 0) {
   <div class="flex flex-center">
-    <h2>Nenhuma dieta encontrado</h2>
+    <h2>Nenhum alimento encontrado</h2>
   </div>
 }
 

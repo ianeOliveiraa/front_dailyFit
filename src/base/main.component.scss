@@ -25,11 +25,13 @@
 }
 
 mat-toolbar {
-  background: var(--mat-sys-primary);
+  background: #1f4d53;
 }
 
 mat-sidenav {
-  background: var(--mat-sys-primary);
+  background: #86b3b9;
+  //background: #2c595f;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+

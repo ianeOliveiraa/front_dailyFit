@@ -14,6 +14,7 @@ import {TrainingExercise} from '../../shared/models/training_exercise';
 import { Training } from '../../shared/models/training';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-exercise',
@@ -48,7 +49,7 @@ export class ExerciseComponent implements OnInit {
   private trainginService: BaseService<Training>
   public trainingName = "";
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.service = new BaseService<TrainingExercise>(http, URLS.TRAINING_EXERCISE);
     this.trainginService = new BaseService<Training>(http, URLS.TRAINING);
     this.route.data
@@ -87,11 +88,6 @@ export class ExerciseComponent implements OnInit {
     });
   }
 
-  public goToPage(route: string): void {
-    const extras: NavigationExtras = {queryParamsHandling: 'merge'};
-    this.router.navigate([route], extras).then();
-  }
-
   public onClickNewTraining(): void {
     const extras: NavigationExtras = {queryParamsHandling: 'merge'};
     this.router.navigate(["training", this.training.id.toString(), 'exercise', 'create'], extras).then();
@@ -103,19 +99,26 @@ export class ExerciseComponent implements OnInit {
   }
 
 
-  clickEditName(event: MouseEvent) {
+  clickEditName(event: MouseEvent): void {
     if (this.isSavingName()) {
       return;
     }
     this.isSavingName.set(true);
 
     this.trainginService.update(this.training.id, {
-      "id": this.training.id,
-      "name": this.trainingName,
-    } as Training).subscribe(() =>{
+      id: this.training.id,
+      name: this.trainingName,
+    } as Training).subscribe(() => {
       this.training.name = this.trainingName;
       this.isSavingName.set(false);
-    })
+
+      this.openSnackBar('Nome atualizado com sucesso!', 'Fechar');
+    }, (error) => {
+      this.isSavingName.set(false);
+
+      this.openSnackBar('Erro ao atualizar o nome', 'Fechar');
+    });
+
     event.stopPropagation();
   }
 
@@ -123,6 +126,15 @@ export class ExerciseComponent implements OnInit {
     const extras: NavigationExtras = {queryParamsHandling: 'merge'};
     this.router.navigate(["../training"], extras).then();
   }
+
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  }
+
 }
 
 
