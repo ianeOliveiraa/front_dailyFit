@@ -5,8 +5,8 @@ mat-card {
   @include mat.card-overrides((title-text-size: 35px,
     subtitle-text-size: 20px,
   ));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 mat-card-title {
   width: 100%;
@@ -21,4 +21,13 @@ mat-card-title {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+.fundo {
+  background: linear-gradient(135deg, #22431a, #559754); // Gradiente de roxo para azul
+  height: 100vh; // Garante que ocupe toda a altura da tela
+  margin: 0; // Remove margem padrão do body
+  display: flex;
+  justify-content: center;
+  align-items: center; // Centraliza o conteúdo vertical e horizontalmente
 }

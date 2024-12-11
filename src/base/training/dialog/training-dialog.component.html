@@ -1,6 +1,16 @@
 <h2 mat-dialog-title>Treinamento</h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
+    <mat-form-field >
+      <mat-label>Data</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <mat-form-field>
       <mat-label>Nome do treinamento</mat-label>
       <input matInput formControlName="name" autofocus required>

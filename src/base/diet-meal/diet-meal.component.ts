@@ -119,10 +119,6 @@ export class DietMealComponent implements OnInit{
     });
   }
 
-
-
-
-
   public onBackClick(): void {
     const extras: NavigationExtras = {queryParamsHandling: 'merge'};
     this.router.navigate(["diet"], extras).then();

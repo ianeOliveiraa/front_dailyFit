@@ -30,11 +30,6 @@
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Cod.</th>
-        <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
-      </ng-container>
-
       <ng-container matColumnDef="exercise">
         <th mat-header-cell *matHeaderCellDef> Exercicios</th>
         <td mat-cell *matCellDef="let element"> {{ element.exercise.name }}</td>

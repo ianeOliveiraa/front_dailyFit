@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { TrainingDialogComponent } from './dialog/training-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-training',
@@ -29,13 +30,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatFabButton,
     MatCardModule,
     MatToolbarModule,
+    DatePipe,
   ],
   templateUrl: './training.component.html',
   styleUrl: './training.component.scss'
 })
 export class TrainingComponent implements OnInit{
   public dataSource: Training[] = [];
-  public displayedColumns = ['id', 'name', 'actions'];
+  public displayedColumns = ['date', 'name', 'actions'];
   public searchName: string = '';
 
   private router: Router = new Router();

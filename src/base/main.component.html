@@ -5,7 +5,7 @@
 
     <mat-nav-list>
       @for (menu of menuList; track menu.route) {
-      <a mat-list-item class="ml-3 mr-3 menu-item text-white " [routerLink]="menu.route" [routerLinkActiveOptions]="{ exact: true }"
+      <a mat-list-item class="ml-3 mr-3 menu-item " [routerLink]="menu.route" [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="menu-btn-active" >
         {{ menu.title }}
       </a>
@@ -17,7 +17,7 @@
     <mat-toolbar>
       @if (isHandset$ | async) {
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon class="text-white" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
       <span  class="font-bold text-white" >DailyFit</span>
@@ -33,6 +33,10 @@
           {{profile.login.username}}
         </span>
       </button>
+    </mat-toolbar>
+    <mat-toolbar class="footer">
+      <p>DailyFit</p>
+      <p>2024</p>
     </mat-toolbar>
     <div class="content">
       <div class="mt-4">

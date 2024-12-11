@@ -19,11 +19,11 @@ $danger-color: #F44336; // Vermelho para excluir
 html {
   color-scheme: light;
   @include mat.theme((
-    color: mat.$violet-palette,
-     //color: (
-     //  primary: theme2.$primary-palette,
-     //  tertiary: theme2.$tertiary-palette,
-     //),
+    //color: mat.$violet-palette,
+     color: (
+       primary: theme2.$primary-palette,
+       tertiary: theme2.$tertiary-palette,
+     ),
     typography: (
       plain-family: Ubuntu,
       brand-family: Ubuntu,

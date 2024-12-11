@@ -40,7 +40,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ExerciseComponent implements OnInit {
   public dataSource: TrainingExercise[] = [];
-  public displayedColumns = ['id', 'exercise', 'repetitions', 'series', 'rest_time', 'actions'];
+  public displayedColumns = ['exercise', 'repetitions', 'series', 'rest_time', 'actions'];
   public training: Training;
   private router: Router = new Router();
   isSavingName = signal(false);

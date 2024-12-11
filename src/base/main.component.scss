@@ -35,3 +35,34 @@ mat-sidenav {
   border-bottom-right-radius: 0;
 }
 
+.footer{
+  height: 7%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+}
+
+p{
+  color: rgb(141, 139, 139);
+  margin: 0;
+  font-size: 1rem;
+  padding: 0 18%;
+  text-align: right;
+}
+
+mat-nav-list {
+  a {
+    color: white; // Define a cor branca para os links
+
+    &:hover {
+      color: #cccccc; // Opcional: altera a cor ao passar o mouse
+    }
+
+    &.menu-btn-active {
+      background-color: rgba(255, 255, 255, 0.1); // Opcional: destaque para o item ativo
+    }
+  }
+}
