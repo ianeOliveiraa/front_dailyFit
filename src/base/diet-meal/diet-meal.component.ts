@@ -54,7 +54,7 @@ import {DatePipe} from '@angular/common';
     DatePipe
   ],
   templateUrl: './diet-meal.component.html',
-  styleUrl: './diet-meal.component.css'
+  styleUrl: './diet-meal.component.scss'
 })
 export class DietMealComponent implements OnInit{
   public dataSource: MealFood[] = [];

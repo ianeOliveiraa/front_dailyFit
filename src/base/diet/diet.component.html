@@ -59,13 +59,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToPage(row.id)"></tr>
       </table>
-    </div>
 
-    @if (dataSource.length === 0) {
-      <div class="flex flex-center">
-        <h2>Nenhum treino encontrado</h2>
-      </div>
-    }
+      @if (dataSource.length === 0) {
+        <div class="flex flex-center">
+          <h2>Nenhum treino encontrado</h2>
+        </div>
+      }
+    </div>
   </mat-card-content>
 </mat-card>
 

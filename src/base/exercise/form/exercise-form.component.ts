@@ -36,7 +36,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatIconButton,
   ],
   templateUrl: './exercise-form.component.html',
-  styleUrl: './exercise-form.component.css'
+  styleUrl: './exercise-form.component.scss'
 })
 export class ExerciseFormComponent extends BaseComponent<TrainingExercise> implements OnInit {
   public formGroup: FormGroup;

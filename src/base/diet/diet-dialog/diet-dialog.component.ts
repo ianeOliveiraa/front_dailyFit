@@ -37,7 +37,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './diet-dialog.component.html',
-  styleUrls: ['./diet-dialog.component.css'],
+  styleUrls: ['./diet-dialog.component.scss'],
 })
 export class DietDialogComponent implements OnInit {
   public formGroup: FormGroup;
