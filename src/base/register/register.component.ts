@@ -21,14 +21,10 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     MatCardModule,
-    MatToolbarModule,
-    MatFormFieldModule,
     MatIconModule,
-    MatInput,
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    MatIconButton,
     MatCard,
     MatTableModule,
     MatFormFieldModule,
@@ -37,16 +33,15 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatIcon,
     MatButtonModule,
     MatInputModule,
-    MatCardModule,
     MatToolbarModule,
 
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
-  registerForm = new FormGroup({
+  public registerForm = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     firstname: new FormControl(null, [Validators.required]),
     lastname: new FormControl(null, [Validators.required]),

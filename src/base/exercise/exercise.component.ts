@@ -36,7 +36,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatToolbarModule,
   ],
   templateUrl: './exercise.component.html',
-  styleUrl: './exercise.component.css'
+  styleUrl: './exercise.component.scss'
 })
 export class ExerciseComponent implements OnInit {
   public dataSource: TrainingExercise[] = [];

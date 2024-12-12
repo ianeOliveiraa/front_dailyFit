@@ -8,6 +8,11 @@ mat-card {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.mat-mdc-card {
+  background-color: rgba(255, 255, 255, 0.85); /* Cor branca com 85% de opacidade */
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
 mat-card-title {
   width: 100%;
   text-align: center;
@@ -20,12 +25,16 @@ mat-card-title {
 .img {
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
+  background-position: top center;
+}
+
+.w-full {
+  width: 90% !important;
 }
 
 .fundo {
-  background: linear-gradient(135deg, #22431a, #559754); // Gradiente de roxo para azul
-  height: 100vh; // Garante que ocupe toda a altura da tela
+  background: linear-gradient(180deg, #7fb1c1, #012363); // Gradiente de roxo para azul
+  height: 72.7vh; // Garante que ocupe toda a altura da tela
   margin: 0; // Remove margem padrão do body
   display: flex;
   justify-content: center;

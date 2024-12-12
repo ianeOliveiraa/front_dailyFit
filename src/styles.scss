@@ -4,26 +4,17 @@
 @use '@angular/material' as mat;
 @use './styles/theme-colors' as theme1;
 @use '../theme-colors-v2' as theme2;
-$primary-color: #4CAF50; // Verde primário
-$secondary-color: #2E7D32; // Verde escuro
-$accent-color: #1edee5; // Azul escuro
-$background-color: #F5F5F5; // Cinza claro
-$row-light-color: #FAFAFA; // Linha clara da tabela
-$row-dark-color: #E3F2FD; // Linha escura da tabela
-$text-color: #FFFFFF; // Texto branco
-$danger-color: #F44336; // Vermelho para excluir
-
+@use '../theme-colors-v3' as theme3;
 
 @import 'primeflex/primeflex';
 
 html {
   color-scheme: light;
   @include mat.theme((
-    //color: mat.$violet-palette,
-     color: (
-       primary: theme2.$primary-palette,
-       tertiary: theme2.$tertiary-palette,
-     ),
+    color: (
+      primary: theme3.$primary-palette,
+      tertiary: theme3.$tertiary-palette,
+    ),
     typography: (
       plain-family: Ubuntu,
       brand-family: Ubuntu,
@@ -46,101 +37,10 @@ mat-toolbar {
   @include mat.elevation(2);
   //@include mat.elevation(2, #e91e63, 0.8);
 }
+
 .menu {
     background: linear-gradient(180deg, #7fb1c1, #001840);
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
 }
-
-// Tabela
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-
-  thead {
-    background-color: $accent-color;
-
-    th {
-      //color: $text-color;
-      font-weight: 700;
-      text-align: left;
-      padding: 0.75rem;
-    }
-  }
-
-  tbody {
-    tr {
-      &:nth-child(even) {
-        background-color: $row-light-color;
-      }
-      &:nth-child(odd) {
-        background-color: $row-dark-color;
-      }
-    }
-
-    td {
-      padding: 0.75rem;
-      font-size: 14px;
-    }
-  }
-}
-
-// Botões
-button {
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
-
-  &.view {
-
-
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.2s;
-    }
-  }
-
-  &.delete {
-    color: $danger-color;
-    background: none;
-
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.2s;
-    }
-  }
-}
-
-// Barra de pesquisa
-.search-bar {
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem auto;
-  display: flex;
-
-  input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid $accent-color;
-    border-radius: 4px 0 0 4px;
-    font-size: 14px;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
-    background-color: $accent-color;
-    color: $text-color;
-    border: none;
-    border-radius: 0 4px 4px 0;
-
-    &:hover {
-      background-color: darken($accent-color, 10%);
-    }
-  }
-}
-
-
-
