@@ -1,5 +1,5 @@
 export const URLS = {
-  BASE: 'http://localhost:8000',
+  BASE: 'http://192.168.15.2:8000',
   LOGIN: '/api-user-login/',
   CREATE_ACCOUNT: '/api-user-register/',
   USERPROFILE: '/core/userprofile/',

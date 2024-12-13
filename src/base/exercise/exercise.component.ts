@@ -15,6 +15,7 @@ import { Training } from '../../shared/models/training';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-exercise',
@@ -34,6 +35,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     MatCardModule,
     MatToolbarModule,
+    MatMenuTrigger,
+    MatMenu,
   ],
   templateUrl: './exercise.component.html',
   styleUrl: './exercise.component.scss'

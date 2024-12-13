@@ -38,14 +38,11 @@ mat-sidenav {
   width: 250px;
 }
 
-.footer{
-  height: 7%;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  width: 100%;
+mat-sidenav-content.over {
+  transition: margin-left 0.3s ease-in-out !important;
+}
+mat-sidenav-content.side {
+  margin-left: 250px !important;
 }
 
 p{
