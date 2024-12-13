@@ -25,6 +25,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FoodsFormDialogComponent} from './foods-form-dialog/foods-form-dialog.component';
 import {Food} from '../../shared/models/food';
 import {DatePipe} from '@angular/common';
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-diet-meal',
@@ -51,7 +52,9 @@ import {DatePipe} from '@angular/common';
     MatCardContent,
     MealTypePipe,
     UnitPipe,
-    DatePipe
+    DatePipe,
+    MatMenu,
+    MatMenuTrigger
   ],
   templateUrl: './diet-meal.component.html',
   styleUrl: './diet-meal.component.scss'

@@ -3,66 +3,76 @@
     <mat-toolbar-row>
       <span>Lista de refeições</span>
       <span class="navbar-spacer"></span>
+
+      <div class="hidden md:block">
       <button mat-fab extended (click)="onAdd()" class="btn-default">
         <mat-icon>add</mat-icon>
         Adicionar refeição
       </button>
+      </div>
+      <div class="flex md:hidden">
+        <button mat-fab (click)="onAdd()" class="btn-default">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-card-content>
-    <div class="flex mt-3">
-<!--            <mat-form-field class="flex-grow-1 flex">-->
-<!--              <mat-label>Procurar por data</mat-label>-->
-<!--              <input matInput [(ngModel)]="searchDate">-->
-<!--            </mat-form-field>-->
-
-<!--      <mat-form-field class="flex-grow-1 flex">-->
-<!--        <mat-label>Procurar por refeição</mat-label>-->
-<!--        <input matInput [(ngModel)]="searchMealTypeLabel">-->
-<!--      </mat-form-field>-->
-
-<!--      <button mat-fab (click)="search()" class="flex-none flex btn-default ml-2">-->
-<!--        <mat-icon>search</mat-icon>-->
-<!--      </button>-->
-    </div>
+    <div class="flex mt-3"></div>
     <div class="mat-elevation-z2">
       <table mat-table [dataSource]="dataSource" class="full-width-table">
 
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Data</th>
+          <th mat-header-cell *matHeaderCellDef class="w-1rem"> Data</th>
           <td mat-cell *matCellDef="let element"> {{ element.date | date: 'dd/MM/yyyy'  }}</td>
         </ng-container>
 
         <ng-container matColumnDef="meal_type">
-          <th mat-header-cell *matHeaderCellDef> Refeição</th>
+          <th mat-header-cell *matHeaderCellDef > Refeição</th>
           <td mat-cell *matCellDef="let element"> {{ element.meal_type | mealType}}</td>
         </ng-container>
 
         <ng-container matColumnDef="total_calories">
-          <th mat-header-cell *matHeaderCellDef> Total calorias por refeição</th>
+          <th mat-header-cell *matHeaderCellDef > Total calorias por refeição</th>
           <td mat-cell *matCellDef="let element"> {{ element.total_calories }} Kcal</td>
         </ng-container>
 
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef></th>
+        <ng-container matColumnDef="actions" >
+          <th mat-header-cell *matHeaderCellDef ></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button aria-label="edit" (click)="goToPage(element.id)">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button aria-label="delete" (click)="deleteObject(element.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div class="hidden md:block">
+              <button mat-icon-button aria-label="edit" (click)="goToPage(element.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="delete" (click)="deleteObject(element.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div class="flex md:hidden">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-icon-button aria-label="edit" (click)="goToPage(element.id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="delete" (click)="deleteObject(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-menu>
+            </div>
+
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToPage(row.id)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
       @if (dataSource.length === 0) {
         <div class="flex flex-center">
-          <h2>Nenhum treino encontrado</h2>
+          <h2>Nenhuma refeição encontrado</h2>
         </div>
       }
     </div>

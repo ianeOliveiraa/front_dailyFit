@@ -18,6 +18,7 @@ import {DietDialogComponent} from './diet-dialog/diet-dialog.component';
 import {Meal} from '../../shared/models/meal';
 import {MealTypePipe} from './meal-type.pipe';
 import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-diet',
@@ -35,6 +36,8 @@ import {MatToolbar, MatToolbarRow} from "@angular/material/toolbar";
     MatToolbar,
     MatToolbarRow,
     DatePipe,
+    MatMenu,
+    MatMenuTrigger,
   ],
   templateUrl: './diet.component.html',
   styleUrl: './diet.component.scss'

@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TrainingDialogComponent } from './dialog/training-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {DatePipe} from '@angular/common';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-training',
@@ -31,6 +32,9 @@ import {DatePipe} from '@angular/common';
     MatCardModule,
     MatToolbarModule,
     DatePipe,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
   ],
   templateUrl: './training.component.html',
   styleUrl: './training.component.scss'
