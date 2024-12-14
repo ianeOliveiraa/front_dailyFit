@@ -24,7 +24,7 @@ mat-card-title {
 }
 
 .fundo{
-  background: linear-gradient(180deg, #7fb1c1, #012363);
+  background: linear-gradient(180deg, #001840, #272729);
   height: 72.7vh;
   margin: 0;
   display: flex;
@@ -33,12 +33,12 @@ mat-card-title {
 }
 
 .mat-mdc-card {
-  background-color: rgba(255, 255, 255, 0.85); /* Cor branca com 85% de opacidade */
+  background-color: rgba(255, 255, 255, 0.85);
   border-color: rgba(255, 255, 255, 0.85);
 }
 
 mat-card-title {
-  font-size: 25px; /* Defina o tamanho desejado */
+  font-size: 25px;
   font-weight: normal;
 }
 

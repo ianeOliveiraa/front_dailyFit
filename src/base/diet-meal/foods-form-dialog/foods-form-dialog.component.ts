@@ -11,13 +11,14 @@ import {firstValueFrom} from 'rxjs';
 import {BaseComponent} from '../../base.component';
 import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import {DietMealComponent} from '../diet-meal.component';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatFabButton} from '@angular/material/button';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-foods-form-dialog',
@@ -33,7 +34,7 @@ import { Inject } from '@angular/core';
     ReactiveFormsModule,
     MatOption,
     MatSelect,
-    MatError
+    MatError,
   ],
   templateUrl: './foods-form-dialog.component.html',
   standalone: true,
@@ -63,6 +64,10 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
   }
 
   public ngOnInit(): void {
+    this.search();
+  }
+
+  public search(resetIndex: boolean = false): void {
     this.formGroup = new FormGroup({
       description: new FormControl('', Validators.required),
       value: new FormControl('', Validators.required),
