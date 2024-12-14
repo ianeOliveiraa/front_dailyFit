@@ -5,10 +5,10 @@
       <span class="navbar-spacer"></span>
 
       <div class="hidden md:block">
-      <button mat-fab extended (click)="onAdd()" class="btn-default">
-        <mat-icon>add</mat-icon>
-        Adicionar refeição
-      </button>
+        <button mat-fab extended (click)="onAdd()" class="btn-default">
+          <mat-icon>add</mat-icon>
+          Adicionar refeição
+        </button>
       </div>
       <div class="flex md:hidden">
         <button mat-fab (click)="onAdd()" class="btn-default">
@@ -18,28 +18,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-card-content>
-    <div class="flex mt-3">
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Buscar por refeições</mat-label>
-        <input type="text"
-               placeholder="Refeições"
-               aria-label="Number"
-               matInput
-               [formControl]="mealTypeControl"
-               [matAutocomplete]="auto">
-
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          @for (option of filteredOptions | async; track option) {
-            <mat-option [value]="option">{{option}}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <button mat-fab (click)="search()" class="flex-none flex btn-default ml-2">
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
+    <div class="flex mt-3"></div>
     <div class="mat-elevation-z2">
       <table mat-table [dataSource]="dataSource" class="full-width-table">
 
@@ -49,12 +28,12 @@
         </ng-container>
 
         <ng-container matColumnDef="meal_type">
-          <th mat-header-cell *matHeaderCellDef> Refeição</th>
+          <th mat-header-cell *matHeaderCellDef > Refeição</th>
           <td mat-cell *matCellDef="let element"> {{ element.meal_type | mealType}}</td>
         </ng-container>
 
         <ng-container matColumnDef="total_calories">
-          <th mat-header-cell *matHeaderCellDef > Total calorias por refeição</th>
+          <th mat-header-cell *matHeaderCellDef > Total de calorias por refeição</th>
           <td mat-cell *matCellDef="let element"> {{ element.total_calories }} Kcal</td>
         </ng-container>
 
@@ -93,7 +72,7 @@
 
       @if (dataSource.length === 0) {
         <div class="flex flex-center">
-          <h2>Nenhuma refeição encontrado</h2>
+          <h2>Nenhuma refeição encontrada</h2>
         </div>
       }
     </div>

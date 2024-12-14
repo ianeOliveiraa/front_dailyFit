@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MealFood} from '../../../shared/models/meal_food';
 import {BaseService} from '../../../shared/service/base.service';
@@ -11,14 +11,14 @@ import {firstValueFrom} from 'rxjs';
 import {BaseComponent} from '../../base.component';
 import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import {DietMealComponent} from '../diet-meal.component';
-import {MatButton, MatFabButton} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-foods-form-dialog',
@@ -35,6 +35,7 @@ import {MatIcon} from '@angular/material/icon';
     MatOption,
     MatSelect,
     MatError,
+    MatAutocompleteModule,
   ],
   templateUrl: './foods-form-dialog.component.html',
   standalone: true,
@@ -45,9 +46,12 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
   public formGroup: FormGroup;
   public object: MealFood = new MealFood();
   private foodService: BaseService<Food>;
-  public foods = [];
+  public foods: Food[] = [];
   public meal: Meal;
   private _router: Router = new Router();
+
+  @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  filteredOptions: Food[];
 
   constructor(
     private dialogRef: MatDialogRef<DietMealComponent>,
@@ -64,10 +68,6 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
   }
 
   public ngOnInit(): void {
-    this.search();
-  }
-
-  public search(resetIndex: boolean = false): void {
     this.formGroup = new FormGroup({
       description: new FormControl('', Validators.required),
       value: new FormControl('', Validators.required),
@@ -77,7 +77,7 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
       this.foods = data;
       if (this.object.id != null) {
         this.object.food = this.foods.find(f => f.id == this.object.food.id);
-        this.formGroup.get('description')?.setValue(this.object.food.id);
+        this.formGroup.get('description')?.setValue(this.object.food);
         this.formGroup.get('value')?.setValue(this.object.value);
       }
     });
@@ -88,8 +88,7 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
       const formData = this.formGroup.value;
 
       this.object.meal = this.meal;
-      this.object.food = new Food();
-      this.object.food.id = formData.description;
+      this.object.food = formData.description;
       this.object.value = formData.value;
 
       if (this.object.id != null) {
@@ -115,4 +114,12 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
     this.dialogRef.close();
   }
 
+  filter(): void {
+    const filterValue = this.input.nativeElement.value.toLowerCase();
+    this.filteredOptions = this.foods.filter(o => o.description.toLowerCase().includes(filterValue));
+  }
+
+  displayFn(option: any): string {
+    return option ? option.description : '';
+  }
 }

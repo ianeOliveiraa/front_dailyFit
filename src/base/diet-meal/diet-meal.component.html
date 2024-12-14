@@ -107,12 +107,14 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      @if (dataSource.length === 0) {
-        <div class="flex flex-center">
-          <h2>Nenhum alimento encontrado</h2>
-        </div>
-      }
     </table>
+
+    @if (dataSource.length === 0) {
+      <div class="flex flex-center">
+        <h2>Nenhum alimento encontrado</h2>
+      </div>
+    }
+
   </mat-card-content>
 
 </mat-card>
