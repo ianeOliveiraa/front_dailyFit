@@ -2,10 +2,11 @@
 
 mat-card {
   max-width: 40rem !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   @include mat.card-overrides((title-text-size: 35px,
     subtitle-text-size: 20px,
   ));
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 .mat-mdc-card {
@@ -33,10 +34,10 @@ mat-card-title {
 }
 
 .fundo {
-  background: linear-gradient(180deg, #7fb1c1, #012363); // Gradiente de roxo para azul
-  height: 72.7vh; // Garante que ocupe toda a altura da tela
-  margin: 0; // Remove margem padrão do body
+  background: linear-gradient(180deg, #001840, #272729);
+  height: 72.7vh;
+  margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center; // Centraliza o conteúdo vertical e horizontalmente
+  align-items: center;
 }
