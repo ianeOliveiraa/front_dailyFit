@@ -22,7 +22,7 @@ export class UserProfileResolver implements Resolve<any> {
             this.router.navigate(['/login']);
             return EMPTY;
         }
-        return this.service.getById("me").pipe(
+        return this.service.getById("user").pipe(
             catchError((error) => {
               console.error('Erro ao carregar o perfil do usuário:', error);
               this.router.navigate(['/login']);
@@ -31,3 +31,6 @@ export class UserProfileResolver implements Resolve<any> {
           );
     }
 }
+
+//O método resolve é chamado automaticamente antes de ativar a rota.
+// Ele tenta carregar os dados do perfil do usuário a partir do backend.

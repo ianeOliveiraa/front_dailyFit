@@ -24,3 +24,6 @@ export class MealFoodResolver implements Resolve<any> {
     return this.service.getById(action);
   }
 }
+
+//O método resolve é chamado automaticamente antes de a rota ser ativada.
+// Ele busca os dados necessários com base no valor do parâmetro action na URL.

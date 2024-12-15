@@ -21,3 +21,8 @@ export class TrainingResolver implements Resolve<any> {
         return this.service.getById(trainingId);
     }
 }
+
+//O método resolve é executado automaticamente antes de a rota ser ativada.
+// Ele retorna os dados necessários para o componente da rota (neste caso, um treino específico).
+//Usa route.paramMap.get('trainingId') para obter o ID do treino a partir da URL.
+//Usa o método getById do serviço BaseService para buscar o treino pelo ID.

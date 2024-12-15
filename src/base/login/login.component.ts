@@ -27,9 +27,9 @@ import {CommonModule} from '@angular/common';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  username: string = '';  //Armazena o nome de usuário inserido no formulário
+  password: string = '';  //Armazena a senha inserida no formulário
+  errorMessage: string = '';  //Mensagem de erro exibida ao usuário em caso de falha no login
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -43,4 +43,5 @@ export class LoginComponent {
       },
     });
   }
+  //Utiliza o método login do AuthService, passando as credenciais do formulário (username e password).
 }

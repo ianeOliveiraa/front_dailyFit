@@ -54,7 +54,7 @@ export class DietDialogComponent implements OnInit {
     { value: 8, viewValue: "Pós-treino" },
     { value: 9, viewValue: "Lanche noturno" },
     { value: 10, viewValue: "Brunch" },
-  ];
+  ];  //lista os tipos de refeições disponíveis com seus valores e descrições (viewValue) - usado no select.
 
   constructor(private dialogRef: MatDialogRef<DietComponent>,
               private http: HttpClient,
@@ -81,7 +81,7 @@ export class DietDialogComponent implements OnInit {
 
       // Envia os dados para o serviço
       this.dietService.save(formValue as Meal).subscribe((response) => {
-        this.dialogRef.close(); // Fecha o diálogo
+        this.dialogRef.close();
         this.router.navigate(['diet', response.id, 'diet-meal']); // Redireciona para a próxima página
       });
     }

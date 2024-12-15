@@ -31,13 +31,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-  userProfile: UserProfile;
+  userProfile: UserProfile;   //Armazena os dados do perfil do usuário.
 
   private service: BaseService<UserProfile>
   private _snackBar = inject(MatSnackBar);
   durationInSeconds = 5;
-
-
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.service = new BaseService<UserProfile>(http, URLS.USERPROFILE + "update_profile/");
@@ -45,6 +43,9 @@ export class ProfileComponent {
       .subscribe((data) => {
         this.userProfile = data['userProfile'] as UserProfile;
       });
+
+    //Obtém os dados resolvidos pela rota (informações do perfil do usuário)
+    //A propriedade userProfile é preenchida com os dados.
   }
 
   onSubmit(): void {

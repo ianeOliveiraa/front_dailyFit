@@ -62,22 +62,16 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 export class DietMealComponent implements OnInit{
   public dataSource: MealFood[] = [];
   public displayedColumns = ['description', 'total_kcal', 'value', 'unit', 'actions'];
-  public meal: Meal;
+  public meal: Meal;  //Representa a refeição associada aos alimentos carregados.
   private router: Router = new Router();
-  public food: Food;
-
   private service: BaseService<MealFood>
-  // private mealService: BaseService<Meal>
-  public mealType = "";
 
   constructor(private http: HttpClient, private route: ActivatedRoute,  private dialog: MatDialog) {
     this.service = new BaseService<MealFood>(http, URLS.MEAL_FOOD);
-    // this.mealService = new BaseService<Meal>(http, URLS.MEAL);
-    this.route.data
+
+    this.route.data   //Esses dados geralmente são obtidos através de Resolvers configurados na definição da rota.
       .subscribe((data) => {
         this.meal = data['meal'] as Meal;
-        this.food = data['food'] as Food;
-        this.mealType = this.meal.meal_type;
       });
   }
 
@@ -88,7 +82,7 @@ export class DietMealComponent implements OnInit{
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
     this.service.addParameter("diet", this.meal.id.toString());
-    this.service.getAll().subscribe({
+    this.service.getAll().subscribe({  //Carrega os alimentos associados à refeição do backend.
       next: (data: MealFood[]) => {
         this.dataSource = data;
         console.log('diet-meal load: ', data)
@@ -120,7 +114,7 @@ export class DietMealComponent implements OnInit{
       if (result !== undefined) {
       }
     });
-  }
+  }//Abre um modal para editar um alimento associado à refeição, passando os dados da refeição e do alimento
 
   public onBackClick(): void {
     const extras: NavigationExtras = {queryParamsHandling: 'merge'};
@@ -138,5 +132,5 @@ export class DietMealComponent implements OnInit{
       }
     });
   }
-
+ //Abre um modal para adicionar um novo alimento à refeição.
 }
