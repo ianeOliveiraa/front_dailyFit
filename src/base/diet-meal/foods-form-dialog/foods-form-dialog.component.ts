@@ -33,7 +33,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatLabel,
     ReactiveFormsModule,
     MatOption,
-    MatSelect,
     MatError,
     MatAutocompleteModule,
   ],
@@ -44,26 +43,22 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implements OnInit {
 
   public formGroup: FormGroup;
-  public object: MealFood = new MealFood();
-  private foodService: BaseService<Food>;
-  public foods: Food[] = [];
-  public meal: Meal;
+  public object: MealFood = new MealFood(); //Representa a instância de MealFood que será criada ou editada
+  private foodService: BaseService<Food>;  //Serviço para buscar os alimentos disponíveis no backend
+  public foods: Food[] = []; //Array contendo todos os alimentos disponíveis
+  public meal: Meal;  //Representa a refeição à qual o alimento será associado
   private _router: Router = new Router();
 
-  @ViewChild('input') input: ElementRef<HTMLInputElement>;
-  filteredOptions: Food[];
+  @ViewChild('input') input: ElementRef<HTMLInputElement>; //Autocomplte: Referência ao campo de entrada para capturar o texto digitado pelo usuário
+  filteredOptions: Food[];  //Representa a refeição à qual o alimento será associado
 
-  constructor(
-    private dialogRef: MatDialogRef<DietMealComponent>,
-    http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  constructor(private dialogRef: MatDialogRef<DietMealComponent>, http: HttpClient, @Inject(MAT_DIALOG_DATA) public data: any) {
     super(http, URLS.MEAL_FOOD);
     this.foodService = new BaseService<Food>(http, URLS.FOOD);
 
     if (data) {
-      this.meal = data.meal;
-      this.object = data.food ?? new MealFood();
+      this.meal = data.meal; //Armazena os dados da refeição (meal)
+      this.object = data.food ?? new MealFood(); //Armazena os dados do alimento (food) - usado para edição.
     }
   }
 
@@ -73,9 +68,10 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
       value: new FormControl('', Validators.required),
     });
 
+    //Busca todos os alimentos disponíveis através do foodService
     firstValueFrom(this.foodService.getAll()).then((data) => {
       this.foods = data;
-      if (this.object.id != null) {
+      if (this.object.id != null) { //Se o modal foi aberto para edição preenche o formulário com os dados do alimento.
         this.object.food = this.foods.find(f => f.id == this.object.food.id);
         this.formGroup.get('description')?.setValue(this.object.food);
         this.formGroup.get('value')?.setValue(this.object.value);
@@ -84,14 +80,13 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
   }
 
   public saveOrUpdate(): void {
-    if (this.formGroup.valid) {
-      const formData = this.formGroup.value;
-
-      this.object.meal = this.meal;
+    if (this.formGroup.valid) { //Verifica se os campos do formulário foram preenchidos corretamente
+      const formData = this.formGroup.value; //Obtém os valores preenchidos no formulário
+      this.object.meal = this.meal; //Os valores do formulário são atribuídos ao objeto
       this.object.food = formData.description;
       this.object.value = formData.value;
 
-      if (this.object.id != null) {
+      if (this.object.id != null) { //se não for null atualiza o alimento existente
         this.service.update(this.object.id, this.object).subscribe(() => {
           this.dialogRef.close();
           this.goToListDiet();
@@ -117,9 +112,9 @@ export class FoodsFormDialogComponent  extends BaseComponent<MealFood> implement
   filter(): void {
     const filterValue = this.input.nativeElement.value.toLowerCase();
     this.filteredOptions = this.foods.filter(o => o.description.toLowerCase().includes(filterValue));
-  }
+  } //Filtra os alimentos com base no texto digitado no campo de busca.
 
   displayFn(option: any): string {
     return option ? option.description : '';
-  }
+  }//Define como os alimentos filtrados são exibidos no campo de autocomplete.
 }

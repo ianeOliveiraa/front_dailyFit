@@ -40,14 +40,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ExerciseFormComponent extends BaseComponent<TrainingExercise> implements OnInit {
   public formGroup: FormGroup;
-  public object: TrainingExercise = new TrainingExercise();
+  public object: TrainingExercise = new TrainingExercise(); //Objeto do tipo TrainingExercise que armazena os dados do exercício em edição ou criação.
+
   private grupoMuscularService: BaseService<GroupMuscle>;
   private exercicieService: BaseService<Exercise>
 
-  public groupMusculares = [];
-  public todosExercicios = [];
-  public exercicios = [];
-  public training: Training;
+  public groupMuscle = []; //Array que armazena os grupos musculares carregados do backend
+  public allExercise = []; //Array que armazena os exercícios carregados do backend
+  public filterExercise = [];  //Exercícios filtrados com base no grupo muscular selecionado.
+  public training: Training; //Treino associado ao exercício.
   private _router: Router = new Router();
 
   constructor(http: HttpClient, private route: ActivatedRoute,  private snackBar: MatSnackBar) {
@@ -55,7 +56,7 @@ export class ExerciseFormComponent extends BaseComponent<TrainingExercise> imple
     this.grupoMuscularService = new BaseService<GroupMuscle>(http, URLS.GROUP_MUSCLE);
     this.exercicieService = new BaseService<Exercise>(http, URLS.EXERCISE);
 
-    this.route.data
+    this.route.data  //Carrega Dados da Rota
       .subscribe((data) => {
         this.training = data['training'] as Training;
         const trainingExercise = data['trainingExercise'] as TrainingExercise;
@@ -75,20 +76,20 @@ export class ExerciseFormComponent extends BaseComponent<TrainingExercise> imple
       rest_time: new FormControl('', Validators.required),
       muscle_group: new FormControl('', Validators.required),
     })
-    const promises = [];
+    const promises = [];   //Carrega grupos musculares e exercícios do backend.
     promises.push(firstValueFrom(this.grupoMuscularService.getAll()));
     promises.push(firstValueFrom(this.exercicieService.getAll()));
 
     this.formGroup.get('muscle_group')?.valueChanges.subscribe(value => {
-      this.exercicios = this.todosExercicios.filter(exercicio => exercicio.muscle_group == value);
-    });
+      this.filterExercise = this.allExercise.filter(exercicio => exercicio.muscle_group == value);
+    });  //Filtra os exercícios com base no grupo muscular selecionado.
 
-    Promise.all(promises).then((values) => {
-      this.groupMusculares = values[0];
-      this.todosExercicios = values[1];
-      if (this.object.id != null) {
-        this.object.exercise = this.todosExercicios.find(f => f.id == this.object.exercise.id);
-        this.formGroup.get('exercise')?.setValue(this.object.exercise.id);
+    Promise.all(promises).then((values) => {  //Aguarda que todas as promessas no array sejam resolvidas.
+      this.groupMuscle = values[0];  //Lista de grupos musculares.
+      this.allExercise = values[1];  //Lista de exercícios.
+      if (this.object.id != null) {  //Se um exercício estiver sendo editado
+        this.object.exercise = this.allExercise.find(f => f.id == this.object.exercise.id);  //Encontra o exercício correspondente em allExercise
+        this.formGroup.get('exercise')?.setValue(this.object.exercise.id); //Preenche os campos do formulário com os dados do exercício
         this.formGroup.get('repetitions')?.setValue(this.object.repetitions);
         this.formGroup.get('series')?.setValue(this.object.series);
         this.formGroup.get('rest_time')?.setValue(this.object.rest_time);
@@ -99,18 +100,18 @@ export class ExerciseFormComponent extends BaseComponent<TrainingExercise> imple
   }
 
   public saveOrUpdate(): void {
-    if (this.formGroup.valid) {
-      Object.keys(this.formGroup.getRawValue()).forEach((key: string) => {
+    if (this.formGroup.valid) { //Valida o formulário
+      Object.keys(this.formGroup.getRawValue()).forEach((key: string) => {  //Atualiza o objeto object com os valores do formulário.
         const value = this.formGroup.getRawValue()[key];
         if (value !== null && value !== undefined) {
           this.object[key] = value;
         }
       });
-      const exercise = this.todosExercicios.find(exercicio => exercicio.id == this.object['exercise']);
+      const exercise = this.allExercise.find(exercicio => exercicio.id == this.object['exercise']);
       this.object['training'] = this.training;
       this.object['exercise'] = exercise;
 
-      if (this.object.id != null) {
+      if (this.object.id != null) {  //Salva ou atualiza o exercício no backend, exibindo mensagens de sucesso ou erro
         this.service.update(this.object.id, this.object).subscribe({
           next: (response) => {
             this.openSnackBar('Exercício atualizado com sucesso!', 'Fechar');

@@ -16,7 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     if (this.authService.isAuthenticated()) {
       request = request.clone({
         withCredentials: true,
@@ -31,4 +30,5 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(request);
   }
+
 }

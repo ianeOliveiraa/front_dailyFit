@@ -44,17 +44,18 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 export class ExerciseComponent implements OnInit {
   public dataSource: TrainingExercise[] = [];
   public displayedColumns = ['exercise', 'repetitions', 'series', 'rest_time', 'actions'];
-  public training: Training;
+  public training: Training;  //carrega o treino atual
   private router: Router = new Router();
-  isSavingName = signal(false);
+  isSavingName = signal(false);  //Um sinal reativo que rastreia o estado de salvamento do nome do treino (ativo/inativo).
 
   private service: BaseService<TrainingExercise>
-  private trainginService: BaseService<Training>
-  public trainingName = "";
+  private trainingService: BaseService<Training>
+
+  public trainingName = "";  //Nome do treino, usado no campo de edição.
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.service = new BaseService<TrainingExercise>(http, URLS.TRAINING_EXERCISE);
-    this.trainginService = new BaseService<Training>(http, URLS.TRAINING);
+    this.trainingService = new BaseService<Training>(http, URLS.TRAINING);
     this.route.data
       .subscribe((data) => {
         this.training = data['training'] as Training;
@@ -68,7 +69,7 @@ export class ExerciseComponent implements OnInit {
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    this.service.addParameter("training", this.training.id.toString());
+    this.service.addParameter("training", this.training.id.toString());  //Adiciona o ID do treino como filtro.
     this.service.getAll().subscribe({
       next: (data: TrainingExercise[]) => {
         this.dataSource = data;
@@ -78,7 +79,7 @@ export class ExerciseComponent implements OnInit {
         console.error('Error loading training exercise');
       }
     });
-  }
+  } //Carrega os exercícios associados ao treino atual (training.id).
 
   public deleteObject(id: number): void {
     this.service.delete(id).subscribe({
@@ -102,13 +103,14 @@ export class ExerciseComponent implements OnInit {
   }
 
 
+  // Atualizar Nome do Treino
   clickEditName(event: MouseEvent): void {
     if (this.isSavingName()) {
       return;
     }
     this.isSavingName.set(true);
 
-    this.trainginService.update(this.training.id, {
+    this.trainingService.update(this.training.id, {
       id: this.training.id,
       name: this.trainingName,
     } as Training).subscribe(() => {

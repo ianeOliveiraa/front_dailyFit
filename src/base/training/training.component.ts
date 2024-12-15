@@ -40,7 +40,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
   styleUrl: './training.component.scss'
 })
 export class TrainingComponent implements OnInit{
-  public dataSource: Training[] = [];
+  public dataSource: Training[] = [];       //Armazena os treinos carregados da API.
   public displayedColumns = ['date', 'name', 'actions'];
   public searchName: string = '';
 
@@ -49,8 +49,10 @@ export class TrainingComponent implements OnInit{
   private service: BaseService<Training>
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
-    this.service = new BaseService<Training>(http, URLS.TRAINING);
+    this.service = new BaseService<Training>(http, URLS.TRAINING);  ////Serviço genérico configurado para trabalhar com o modelo Training no endpoint URLS.TRAINING.
   }
+
+  //construtor: é usado para inicializar a classe e injetar dependências que serão utilizadas pelo componente.
 
   public ngOnInit(): void {
     this.search();
@@ -69,7 +71,7 @@ export class TrainingComponent implements OnInit{
         console.error('Error loading training');
       }
     });
-  }
+  } //realiza uma requisição HTTP para buscar todos os treinos do backend e atualiza a propriedade dataSource com os dados recebidos.
 
   public deleteObject(id: number): void {
     this.service.delete(id).subscribe({
@@ -80,7 +82,7 @@ export class TrainingComponent implements OnInit{
         console.error('Error deleting training');
       }
     });
-  }
+  } //Exclui um treino pelo id.
 
   public goToPage(trainingId: string): void {
     const extras: NavigationExtras = {queryParamsHandling: 'merge'};
@@ -90,12 +92,12 @@ export class TrainingComponent implements OnInit{
   onAdd(): void {
     const dialogRef = this.dialog.open(TrainingDialogComponent, {
       data: {name: ""},
-    });
+    });  //Passa os parâmetros da URL com a configuração queryParamsHandling: 'merge', mantendo os parâmetros existentes.
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result !== undefined) {
       }
     });
-  }
+  } //Abre um diálogo para adicionar um novo treino.
 }

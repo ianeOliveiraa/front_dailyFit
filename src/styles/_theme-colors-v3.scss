@@ -2,7 +2,7 @@
 // Proceed with caution if making changes to this file.
 
 @use 'sass:map';
-@use '@angular/material' as mat;
+@use '../../node_modules/@angular/material/index' as mat;
 
 // Note: Color palettes are generated from primary: #0288d1, secondary: #b3e5fc, tertiary: #03a9f4, neutral: #FFFFFF
 $_palettes: (
@@ -146,7 +146,7 @@ $tertiary-palette: map.merge(map.get($_palettes, tertiary), $_rest);
   @if ($theme-type == color-scheme) {
     @return light-dark(#{$light}, #{$dark});
   }
-  
+
   @error 'Unknown theme-type #{$theme-type}. Expected light, dark, or color-scheme';
 }
 

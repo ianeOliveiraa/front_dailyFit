@@ -21,7 +21,7 @@
         <mat-form-field class="flex-1 m-2">
           <mat-label>Grupo Muscular</mat-label>
           <mat-select class="form-select "  formControlName="muscle_group" required>
-            @for (option of groupMusculares; track option) {
+            @for (option of groupMuscle; track option) {
               <mat-option  [value]="option.id">
                 {{ option.name }}
               </mat-option>
@@ -34,7 +34,7 @@
         <mat-form-field class="flex-1 m-2">
           <mat-label>Exercicio</mat-label>
           <mat-select class="form-select "  formControlName="exercise" required>
-            @for (option of exercicios; track option) {
+            @for (option of filterExercise; track option) {
               <mat-option  [value]="option.id">
                 {{ option.name }}
               </mat-option>

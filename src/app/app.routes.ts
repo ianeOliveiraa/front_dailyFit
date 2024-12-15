@@ -18,32 +18,32 @@ import {FoodsFormDialogComponent} from '../base/diet-meal/foods-form-dialog/food
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: 'login',  //tela de login
     component: LoginComponent
   },
   {
-    path: 'register',
+    path: 'register',  //tela de cadastro
     component: RegisterComponent
   },
   {
-    path: "",
+    path: "",  //rota principal (/)
     component: MainComponent,
     resolve: {
       userProfile: UserProfileResolver,
     },
     children: [
       {
-        path: 'userprofile',
+        path: 'userprofile',  //tela de perfil
         component: ProfileComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard], //somente usuários autenticados podem acessá-la
       },
       {
-        path: 'training',
+        path: 'training',   //lista os treinos
         component: TrainingComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'training/:trainingId/exercise',
+        path: 'training/:trainingId/exercise',  //lista os exercícios de um treino
         component: ExerciseComponent,
         canActivate: [AuthGuard],
         resolve: {
@@ -51,7 +51,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'training/:trainingId/exercise/:action',
+        path: 'training/:trainingId/exercise/:action',  //Renderiza o formulário de adição ou edição de exercícios
         component: ExerciseFormComponent,
         canActivate: [AuthGuard],
         resolve: {
@@ -60,12 +60,12 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'diet',
+        path: 'diet',  //lista de refeições ou dietas
         component: DietComponent,
         canActivate: [AuthGuard],
       },
       {
-        path: 'diet/:mealId/diet-meal',
+        path: 'diet/:mealId/diet-meal',  //exibir os alimentos associados a uma refeição.
         component: DietMealComponent,
         canActivate: [AuthGuard],
         resolve: {
@@ -73,7 +73,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'diet/:mealId/diet-meal/:action',
+        path: 'diet/:mealId/diet-meal/:action',  //Renderiza o formulário de adição ou edição de alimentos
         component: FoodsFormDialogComponent,
         canActivate: [AuthGuard],
         resolve: {
@@ -85,12 +85,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: '',  //rota padrão - Redireciona para /training quando a URL é a raiz (/)
     redirectTo: '/training',
     pathMatch: 'full'
   },
   {
-    path: '**',
+    path: '**',  //Captura todas as URLs não mapeadas e redireciona para /training.
     redirectTo: '/training'
   },
 ];

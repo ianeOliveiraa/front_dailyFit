@@ -43,14 +43,12 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
   styleUrl: './diet.component.scss'
 })
 export class DietComponent implements OnInit{
-  public dataSource: Meal[] = [];
+  public dataSource: Meal[] = [];  //Fonte de dados para a tabela de refeições
   public displayedColumns = ['date', 'meal_type', 'total_calories', 'actions'];
-  // public searchMealTypeLabel: string = '';
-  // public searchDate: string = '';
 
-  private router: Router = new Router();
+  private router: Router = new Router();  //Usado para navegação entre páginas.
 
-  private service: BaseService<Meal>
+  private service: BaseService<Meal>  //interagir com o endpoint de refeições (URLS.MEAL).
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
     this.service = new BaseService<Meal>(http, URLS.MEAL);
@@ -62,9 +60,7 @@ export class DietComponent implements OnInit{
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    // this.service.addParameter('meal_type_label', this.searchMealTypeLabel);
-    // this.service.addParameter('date', this.searchDate);
-    this.service.getAll().subscribe({
+    this.service.getAll().subscribe({  //Carregar a lista de refeições do backend.
       next: (data: Meal[]) => {
         this.dataSource = data;
         console.log('Meal load: ', data)

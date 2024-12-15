@@ -48,25 +48,22 @@ export class RegisterComponent {
     password: new FormControl(null, [Validators.required]),
     passwordConfirm: new FormControl(null, [Validators.required])
   },
-    // add custom Validators to the form, to make sure that password and passwordConfirm are equal
+    //validador customizado para garantir que a senha e a confirmação sejam iguais.
     { validators: PasswordValidator.passwordsMatching }
   )
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   register() {
-    if (!this.registerForm.valid) {
+    if (!this.registerForm.valid) {  //O método só será executado se o formulário for válido.
       return;
     }
-    const value = new UserRegister();
+    const value = new UserRegister();  //Cria uma instância da classe UserRegister e preenche com os valores do formulário.
     value.email = this.registerForm.value.email;
     value.first_name = this.registerForm.value.firstname;
     value.last_name = this.registerForm.value.lastname;
     value.password = this.registerForm.value.password;
-    this.authService.register(value).pipe(
+    this.authService.register(value).pipe(   //Envia os dados ao backend por meio do método register do AuthService.
       tap(() => this.router.navigate(['/login']))
     ).subscribe();
   }

@@ -37,8 +37,8 @@ interface Menu {
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-  public menuList: Menu[];
-  public profile: UserProfile;
+  public menuList: Menu[];   //Armazena os itens do menu de navegação.
+  public profile: UserProfile;  //Armazena os dados do perfil do usuário, carregados pelo resolver associado à rota.
 
   private breakpointObserver = inject(BreakpointObserver);
 
@@ -46,7 +46,7 @@ export class MainComponent {
     .pipe(
       map(result => result.matches),
       shareReplay()
-    );
+    );  //Verifica se o dispositivo atual é um handset (celular)
 
   constructor(private authService: AuthService, private route: ActivatedRoute) {
     this.route.data
@@ -68,3 +68,7 @@ export class MainComponent {
   }
 
 }
+
+//O MainComponent serve como o layout principal da aplicação.
+//Ele incorpora funcionalidades como navegação, exibição do perfil do usuário, logout e adaptação da interface para
+// dispositivos móveis.

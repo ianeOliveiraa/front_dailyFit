@@ -46,11 +46,9 @@ export class TrainingDialogComponent implements OnInit {
 
   public formGroup: FormGroup;
 
-  public trainingService: BaseService<Training>;
+  public trainingService: BaseService<Training>;  //Usado para salvar os dados do formulário no backend.
 
-  constructor(private dialogRef: MatDialogRef<TrainingComponent>,
-    private http: HttpClient,
-    private router: Router) {
+  constructor(private dialogRef: MatDialogRef<TrainingComponent>, private http: HttpClient, private router: Router) {
     this.trainingService = new BaseService<Training>(http, URLS.TRAINING);
   }
 
@@ -58,7 +56,7 @@ export class TrainingDialogComponent implements OnInit {
     this.formGroup = new FormGroup({
       name: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
-    })
+    }) //inicializa o fromulario
   }
 
   onSave(): void {
